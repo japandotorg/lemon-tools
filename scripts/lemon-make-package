@@ -56,11 +56,11 @@ if __name__ == '__main__':
     
     # create sample files in a folder
     dirname = os.path.dirname
-    source = dirname(os.path.abspath(lemon_tools.__file__)) + '/data/skeleton'
+    source = dirname(os.path.abspath(lemon_tools.__file__)) + '/data/lemons'
     if os.path.isdir(pkg_name):
         sys.exit('{} already exists'.format(pkg_name))
     copytree(source, pkg_name, ignore=ignore_patterns('*.pyc', '__pycache__'))
-    # search replace in skeleton files
+    # search replace in lemons files
     print(' => New Python Module {} created'.format(pkg_name))
     pkgn = pkg_name
     search_replace(pkgn, 'setup.py', 'proj_description', description)
