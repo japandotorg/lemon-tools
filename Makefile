@@ -10,7 +10,7 @@ test:
 
 ftest:
 	@rm -fr /tmp/ttt; cd /tmp;\
-     	wagon-make-package ttt -d TTT;\
+     	lemon-make-package ttt -d TTT;\
      	cd ttt;\
      	make clean install test;\
      	cd /tmp;\
@@ -20,9 +20,9 @@ ftest:
 clean:
 	@rm -fr dist
 	@rm -fr build 
-	@rm -fr wagon_tools-*.dist-info
-	@rm -fr wagon_tools.egg-info
-	@rm -fr wagon_tools/version.txt
+	@rm -fr lemon_tools-*.dist-info
+	@rm -fr lemon_tools.egg-info
+	@rm -fr lemon_tools/version.txt
 	@find . -name \*.pyc -o -name \*.pyo -o -name __pycache__ -exec rm -rf {} +
 
 
@@ -43,7 +43,7 @@ python_count_lines:
 test_make_pkg:
 	( \
 	rm -fr /tmp/ttt; cd /tmp;\
-	wagon-make-package ttt -d TTT;\
+	lemon-make-package ttt -d TTT;\
 	cd ttt;\
 	make clean install test;\
 	cd /tmp;\
