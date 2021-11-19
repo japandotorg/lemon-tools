@@ -1,3 +1,6 @@
 .idea
 coverage
 /testing_lib
+/build
+/dist
+/lemon_tools.egg-info

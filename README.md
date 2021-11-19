@@ -12,7 +12,7 @@ pip intall lemon_tools
 ## Create a `your_pkg_name` package
 Use `lemon-make-package` to create a new python package:
 ```bash
-  $ wagon-make-package -n new_pkg_name -d "New project package"
+  $ lemon-make-package -n new_pkg_name -d "New project package"
     => New python package new_pkg_name created
   $ cd new_pkg_name/
   $ git init; git add *; git commit -am 'initial commit'
