@@ -20,6 +20,6 @@ setup(name="lemon-tools",
       test_suite='tests',
       # include_package_data: to install data from MANIFEST.in
       include_package_data=True,
-      scripts=[''],
+      scripts=['scripts/lemon-make-package'],
       zip_safe=False
       )
