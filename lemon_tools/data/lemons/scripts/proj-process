@@ -18,10 +18,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=description, usage=usage)
     args = parser.parse_args()
     folder_source, _ = split(proj.__file__)
-    df = pd.read_csv('{}/data/data/csv.gz'.format(folder_source))
+    df = pd.read_csv(f'{folder_source}/data/data/csv.gz')
     print(' proj/data/data.csv.gz loaded')
-    
+
     res = clean_data(df)
     res.to_csv('out.csv', index=False)
     print('==> out.csv MADE ')
-    print('   shape is {}'.format(res.shape))
+    print(f'   shape is {res.shape}')

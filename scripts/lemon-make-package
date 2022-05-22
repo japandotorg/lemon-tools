@@ -18,13 +18,13 @@ def search_replace(path, filename, word, newword):
     """ Open file search/replace and save inplace
     """
     res = []
-    with open('{}/{}'.format(path, filename), 'r') as myfile:
+    with open(f'{path}/{filename}', 'r') as myfile:
         for line in myfile.readlines():
             if line.count(word):
                 # line = sub('\b{}\b'.format(word), newword, line)
                 line = line.replace(word, newword)
             res.append(line)
-    with open('{}/{}'.format(path, filename), 'w') as myfile:
+    with open(f'{path}/{filename}', 'w') as myfile:
         myfile.writelines(res)
         
 def get_parser():
@@ -51,22 +51,22 @@ if __name__ == '__main__':
     args = parser.parse_args()
     pkg_name = args.pkg_name
     description = args.description
-    
+
     gitconfig = expanduser('~/.gitconfig')
-    
+
     # create sample files in a folder
     dirname = os.path.dirname
-    source = dirname(os.path.abspath(lemon_tools.__file__)) + '/data/lemons'
+    source = f'{dirname(os.path.abspath(lemon_tools.__file__))}/data/lemons'
     if os.path.isdir(pkg_name):
-        sys.exit('{} already exists'.format(pkg_name))
+        sys.exit(f'{pkg_name} already exists')
     copytree(source, pkg_name, ignore=ignore_patterns('*.pyc', '__pycache__'))
     # search replace in lemons files
-    print(' => New Python Module {} created'.format(pkg_name))
+    print(f' => New Python Module {pkg_name} created')
     pkgn = pkg_name
     search_replace(pkgn, 'setup.py', 'proj_description', description)
-    search_replace(pkgn, 'setup.py', "'proj'", "'{}'".format(pkg_name))
-    search_replace(pkgn, 'setup.py', "'proj/", "'{}/".format(pkg_name))
-    search_replace(pkgn, 'setup.py', 'proj-run', '{}-run'.format(pkg_name))
+    search_replace(pkgn, 'setup.py', "'proj'", f"'{pkg_name}'")
+    search_replace(pkgn, 'setup.py', "'proj/", f"'{pkg_name}/")
+    search_replace(pkgn, 'setup.py', 'proj-run', f'{pkg_name}-run')
     search_replace(pkgn, 'Makefile', 'proj', pkg_name)
     search_replace(pkgn, 'README.md', '{proj}', pkg_name)
     search_replace(pkgn, 'README.md', '{description}', description)
@@ -74,17 +74,20 @@ if __name__ == '__main__':
     search_replace(pkgn, 'proj/lib.py', 'proj', pkg_name)
     search_replace(pkgn, 'tests/lib_test.py', 'proj', pkg_name)
     search_replace(pkgn, 'scripts/proj-process', 'proj', pkg_name)
-    os.rename('{}/proj'.format(pkg_name), '{}/{}'.format(pkg_name, pkg_name))
+    os.rename(f'{pkg_name}/proj', f'{pkg_name}/{pkg_name}')
     # warning if -n proj1 -> proj11
-    os.rename('{}/scripts/proj-process'.format(pkg_name),
-              '{}/scripts/{}-run'.format(pkg_name, pkg_name))
-    
+    os.rename(
+        f'{pkg_name}/scripts/proj-process',
+        f'{pkg_name}/scripts/{pkg_name}-run',
+    )
+
+
     # CI
     if args.gitlab:
-        shutil.remtree("{}/.github".format(pkg_name), ignore_errors=False, onerror=None)
+        shutil.remtree(f"{pkg_name}/.github", ignore_errors=False, onerror=None)
     else:
-        os.remove("{}/.gitlab-ci.yml".format(pkg_name))
-    
+        os.remove(f"{pkg_name}/.gitlab-ci.yml")
+
     # git init
     call(["git", "init"], cwd=pkg_name)
     if args.gitlab:

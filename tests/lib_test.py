@@ -19,7 +19,7 @@ class TestUtils(unittest.TestCase):
     # @unittest.skip('')
     def test_clean_data(self):
         datapath = os.path.dirname(os.path.abspath(lemon_tools.__file__)) + '/data'
-        df = pd.read_csv('{}/data.csv'.format(datapath))
+        df = pd.read_csv(f'{datapath}/data.csv')
         out = clean_data(df.columns[3])
         self.assertEqual('GAME', out)
         
