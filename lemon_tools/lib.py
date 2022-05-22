@@ -26,9 +26,9 @@ if __name__ == '__main__':
     # for introspection purposes to quickly get this functions on ipython
     # with data
     import lemon_tools
-    
+
     datapath = dirname(abspath(lemon_tools.__file__)) + "/data"
-    data = "{}/data.csv".format(datapath)
+    data = f"{datapath}/data.csv"
     df = pd.read_csv(data)
     data = get_data()
     clean_data = clean_data(data)
