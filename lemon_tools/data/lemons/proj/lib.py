@@ -23,7 +23,7 @@ def clean_data(data):
     # uppercase variable to avoid duplicates
     data.loc[:, 'city'] = data['city'].str.upper()
     # take 2 first digits, 2700 -> 02700 so first two are region
-    data.loc[:, 'postal_code'] = data.postal_code.str.zfill(5).str[0:2]
+    data.loc[:, 'postal_code'] = data.postal_code.str.zfill(5).str[:2]
     # remove columns with more than 50% of nans
     cnans = data.shape[0] / 2
     data = data.dropna(thresh=cnans, axis=1)
@@ -49,6 +49,6 @@ if __name__ == '__main__':
     # for introspection purposes to quickly get this functions on ipython
     import proj
     folder_source, _ = split(proj.__file__)
-    df = pd.read_csv('{}/data/data.csv.gz'.format(folder_source))
+    df = pd.read_csv(f'{folder_source}/data/data.csv.gz')
     clean_data = clean_data(df)
     print(' dataframe cleaned')
